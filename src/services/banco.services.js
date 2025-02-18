@@ -6,10 +6,16 @@ class bancoServices {
 
   async find() {
     const res = await models.banco.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos de los bancos");
+    }
     return res;
   }
   async findOne(id_Banco) {
     const res = await models.banco.findByPk(id_Banco);
+    if(!res){
+      throw new Error("No se encontró datos del banco");
+    }
     return res;
   }
 

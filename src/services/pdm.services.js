@@ -5,10 +5,16 @@ class pdmServices {
 
   async find() {
     const res = await models.pdm.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos");
+    }
     return res;
   }
   async findOne(id_Ticket) {
     const res = await models.pdm.findByPk(id_Ticket);
+    if(!res){
+      throw new Error("El ticket no fue encontrado");
+    }
     return res;
   }
 

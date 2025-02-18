@@ -7,10 +7,16 @@ class tipopagoServices {
 
   async find() {
     const res = await models.tipopago.findAll();
+    if(!res){
+      throw new Error("No se encontraron Tipos de pagos");
+    }
     return res;
   }
   async findOne(id_Pago) {
     const res = await models.tipopago.findByPk(id_Pago);
+    if(!res){
+      throw new Error("Tipo de pago no encontrado");
+    }
     return res;
   }
 
@@ -53,7 +59,7 @@ class tipopagoServices {
   async delete(id) {
     try {
       if(!id|| isNaN(id)){
-        throw new Error("IDinválido ")
+        throw new Error("ID Inválido ")
       }
       const tipopago = await this.findOne(id);
 

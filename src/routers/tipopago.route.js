@@ -11,4 +11,11 @@ route
     .put('/:id',authenticateToken,authorizeRoles(["administrador"]),validateRequest(tipopagoSchema),tipopagoController.update)
     .delete('/:id',authenticateToken,authorizeRoles(["administrador"]),tipopagoController._delete);
 
+    // route
+    // .get('/',tipopagoController.get)
+    // .get('/:id',tipopagoController.getById)
+    // .post('/',tipopagoController.create)
+    // .put('/:id',tipopagoController.update)
+    // .delete('/:id',tipopagoController._delete);
+
 module.exports=route;

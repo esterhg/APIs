@@ -6,11 +6,21 @@ class usuariosServices {
   constructor() {}
 
   async find() {
-    const res = await models.usuarios.findAll();
+    const res = await models.usuarios.findAll( {
+      attributes: { exclude: ["contrasena"] },
+    });
+    if (!res) {
+      throw new Error("No se encontraron Usuarios");
+    }
     return res;
   }
   async findOne(id_Usuario) {
-    const res = await models.usuarios.findByPk(id_Usuario);
+    const res = await models.usuarios.findByPk(id_Usuario, {
+      attributes: { exclude: ["contrasena"] },
+    });
+    if (!res) {
+      throw new Error("Usuario no encontrado");
+    }
     return res;
   }
 
@@ -68,7 +78,6 @@ class usuariosServices {
           await rolUsuario.update({ id_Rol: data.id_Rol });
           console.log("Relación rol_usuario actualizada:", rolUsuario);
         } else {
-
           const newRolUsuario = await models.rol_usuario.create({
             id_Usuario: id,
             id_Rol: data.id_Rol,
@@ -85,7 +94,7 @@ class usuariosServices {
   async delete(id) {
     try {
       if (!id || isNaN(id)) {
-        throw new Error("ID inválido");
+        throw new Error("ID Inválido");
       }
       const usuario = await this.findOne(id);
       if (!usuario) {
@@ -102,4 +111,5 @@ class usuariosServices {
     }
   }
 }
+
 module.exports = usuariosServices;

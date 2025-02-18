@@ -5,10 +5,16 @@ class datosmServices {
 
   async find() {
     const res = await models.datosm.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos");
+    }
     return res;
   }
   async findOne(id_Datos) {
     const res = await models.datosm.findByPk(id_Datos);
+    if(!res){
+      throw new Error("No se encontro");
+    }
     return res;
   }
 

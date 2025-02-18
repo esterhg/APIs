@@ -5,10 +5,16 @@ class ptvServices {
 
   async find() {
     const res = await models.ptv.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos");
+    }
     return res;
   }
   async findOne(id_Ticket) {
     const res = await models.ptv.findByPk(id_Ticket);
+    if(!res){
+      throw new Error("El ticket no fue encontrado");
+    }
     return res;
   }
 
@@ -34,7 +40,7 @@ class ptvServices {
       }
       const ptv = await this.findOne(id);
       if(!ptv){
-        throw new Error("Tipo rol no encontrado")
+        throw new Error("No encontrado")
       }
       await ptv.update(value);
       return ptv

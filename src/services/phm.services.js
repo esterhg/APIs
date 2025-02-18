@@ -5,10 +5,16 @@ class phmServices {
 
   async find() {
     const res = await models.phm.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos");
+    }
     return res;
   }
   async findOne(id_Ticket) {
     const res = await models.phm.findByPk(id_Ticket);
+    if(!res){
+      throw new Error("El ticket no fue encontrado");
+    }
     return res;
   }
 

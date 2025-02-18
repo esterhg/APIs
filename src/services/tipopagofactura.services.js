@@ -5,10 +5,16 @@ class tipopagofacturaServices {
 
   async find() {
     const res = await models.tipopagofactura.findAll();
+    if(!res){
+      throw new Error("No se encontro tipo pago factura")
+    }
     return res;
   }
   async findOne(id_TipoPago) {
     const res = await models.tipopagofactura.findByPk(id_TipoPago);
+    if(!res){
+      throw new Error("Tipo pago factura, no enontrado")
+    }
     return res;
   }
 
@@ -34,7 +40,7 @@ class tipopagofacturaServices {
     }
     const tipopagofactura = await this.findOne(id);
     if(!tipopagofactura){
-      throw new Error("tipo pago factura no encontrado")
+      throw new Error("Tipo pago factura, no enontrado")
     }
      await tipopagofactura.update(value);
     return tipopagofactura;
@@ -48,11 +54,11 @@ class tipopagofacturaServices {
     async delete(id) {
       try {
         if(!id|| isNaN(id)){
-          throw new Error("IDinválido ")
+          throw new Error("ID Inválido ")
         }
         const tipopagofactura = await this.findOne(id);
         if(!tipopagofactura){
-          throw new Error("Tipo pago factura no encontrado")
+          throw new Error("Tipo pago factura, no enontrado")
         }
         await tipopagofactura.destroy();
         return {success:true,message:"Tipo pago factura eliminado correctamente"}

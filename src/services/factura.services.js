@@ -5,10 +5,16 @@ class facturaServices {
 
   async find() {
     const res = await models.factura.findAll();
+    if(!res){
+      throw new Error("No se encontraron facturas");
+    }
     return res;
   }
   async findOne(id_Nofactura) {
     const res = await models.factura.findByPk(id_Nofactura);
+    if(!res){
+      throw new Error("Factura no encontrada");
+    }
     return res;
   }
 

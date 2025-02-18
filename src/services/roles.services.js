@@ -6,10 +6,16 @@ class rolesServices {
 
   async find() {
     const res = await models.roles.findAll();
+    if(!res){
+      throw new Error("No se encontraron roles")
+    }
     return res;
   }
   async findOne(id_Rol) {
     const res = await models.roles.findByPk(id_Rol);
+    if(!res){
+      throw new Error("Rol no encontrado")
+    }
     return res;
   }
 

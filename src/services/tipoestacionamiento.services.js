@@ -7,10 +7,16 @@ class tipoestacionamientoServices {
 
   async find() {
     const res = await models.tipoestacionamiento.findAll();
+    if(!res){
+      throw new Error("Tipo estacionamiento no encontrado");
+    }
     return res;
   }
   async findOne(id_Estacionamiento) {
     const res = await models.tipoestacionamiento.findByPk(id_Estacionamiento);
+    if(!res){
+      throw new Error("Tipo estacionamiento no encontrado");
+    }
     return res;
   }
 
@@ -50,7 +56,7 @@ class tipoestacionamientoServices {
   async delete(id) {
     try {
       if(!id|| isNaN(id)){
-        throw new Error("IDinválido ")
+        throw new Error("ID Inválido")
       }
       const tipoestacionamiento = await this.findOne(id);
       if (!tipoestacionamiento) {

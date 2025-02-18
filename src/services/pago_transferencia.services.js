@@ -5,10 +5,17 @@ class pago_transferenciaServices {
 
   async find() {
     const res = await models.pago_transferencia.findAll();
+    if(!res){
+      throw new Error("No se encontraron los pagos de transferencia");
+    }
+
     return res;
   }
   async findOne(id_PagoTrasferencia) {
     const res = await models.pago_transferencia.findByPk(id_PagoTrasferencia);
+    if(!res){
+      throw new Error("No se encontró pago de transferencia");
+    }
     return res;
   }
   async create(data) {
@@ -48,7 +55,7 @@ class pago_transferenciaServices {
   async delete(id) {
     try {
       if(!id|| isNaN(id)){
-        throw new Error("IDinválido ")
+        throw new Error("ID Inválido ")
       }
       const pago_transferencia = await this.findOne(id);
       if(!pago_transferencia){

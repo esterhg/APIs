@@ -6,10 +6,16 @@ class rtnServices {
 
   async find() {
     const res = await models.rtn.findAll();
+    if(!res){
+      throw new Error("No se encontraron RTNs")
+    }
     return res;
   }
   async findOne(id_rtn) {
     const res = await models.rtn.findByPk(id_rtn);
+    if(!res){
+      throw new Error("No se encontró el RTN")
+    }
     return res;
   }
 

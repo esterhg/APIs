@@ -5,10 +5,16 @@ class tipo_servicioServices {
 
   async find() {
     const res = await models.tipo_servicio.findAll();
+    if(!res){
+      throw new Error("No se enontraron tipos de servicios")
+    }
     return res;
   }
   async findOne(id_Servicio) {
     const res = await models.tipo_servicio.findByPk(id_Servicio);
+    if(!res){
+      throw new Error("Tipo servicio no encontrado")
+    }
     return res;
   }
 
@@ -48,7 +54,7 @@ class tipo_servicioServices {
   async delete(id) {
     try {
       if(!id|| isNaN(id)){
-        throw new Error("ID inválido ")
+        throw new Error("ID Inválido")
       }
       const tipo_servicio= await this.findOne(id);
       if(!tipo_servicio){

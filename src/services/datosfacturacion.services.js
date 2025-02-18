@@ -5,10 +5,16 @@ class datosfacturacionServices {
 
   async find() {
     const res = await models.datosfacturacion.findAll();
+    if(!res){
+      throw new Error("No se encontraron datos de facturas");
+    }
     return res;
   }
   async findOne(id_datosFactura) {
     const res = await models.datosfacturacion.findByPk(id_datosFactura);
+    if(!res){
+      throw new Error("No se encontro datos de factura");
+    }
     return res;
   }
   async findRTN(RTN) {

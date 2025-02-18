@@ -11,4 +11,12 @@ route
     .put('/:id',authenticateToken,authorizeRoles(["administrador"]),validateRequest(tipopagofacturaSchema),tipopagofacturaController.update)
     .delete('/:id',authenticateToken,authorizeRoles(["administrador"]),tipopagofacturaController._delete);
 
+    // route
+    // .get('/',tipopagofacturaController.get)
+    // .get('/:id',tipopagofacturaController.getById)
+    // .post('/',tipopagofacturaController.create)
+    // .put('/:id',tipopagofacturaController.update)
+    // .delete('/:id',tipopagofacturaController._delete);
+
+
 module.exports=route;

@@ -6,10 +6,16 @@ class tipofuncionarioServices {
 
   async find() {
     const res = await models.tipofuncionario.findAll();
+    if(!res){
+      throw new Error("No se encontraron Tipos funcionarios");
+    }
     return res;
   }
   async findOne(id_Funcionario) {
     const res = await models.tipofuncionario.findByPk(id_Funcionario);
+    if(!res){
+      throw new Error("Tipo funcionario no encontrado");
+    }
     return res;
   }
 
@@ -48,7 +54,7 @@ class tipofuncionarioServices {
   async delete(id) {
     try {
       if(!id|| isNaN(id)){
-        throw new Error("IDinválido ")
+        throw new Error("ID Inválido")
       }
       const tipofuncionario = await this.findOne(id);
       if (!tipofuncionario) {

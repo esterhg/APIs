@@ -6,10 +6,16 @@ class tipovehiculoServices {
 
   async find() {
     const res = await models.tipovehiculo.findAll();
+    if(!res){
+      throw new Error("No se encontraron tipos de vehículos")
+    }
     return res;
   }
-  async findOne(idtipoVeh) {
-    const res = await models.tipovehiculo.findByPk(idtipoVeh);
+  async findOne(id_Usuario) {
+    const res = await models.tipovehiculo.findByPk(id_Usuario);
+    if (!res) {
+      throw new Error("Tipo Vehiculo no encontrado");
+  }
     return res;
   }
 

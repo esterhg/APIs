@@ -6,10 +6,16 @@ class rol_usuarioServices {
 
   async find() {
     const res = await models.rol_usuario.findAll();
+    if(!res){
+      throw new Error("Rol de usuarios no encontrado");
+    }
     return res;
   }
   async findOne(id_rol_usuario) {
     const res = await models.rol_usuario.findByPk(id_rol_usuario);
+    if(!res){
+      throw new Error("Rol de usuario no encontrado");
+    }
     return res;
   }
 
@@ -52,10 +58,10 @@ class rol_usuarioServices {
       }
       const rol_usuario = await this.findOne(id);
        if(!rol_usuario){
-         throw new Error("Tipo rol no encontrado")
+         throw new Error("Rol de usuario no encontrado")
        }
       await rol_usuario.destroy();
-      return {success:true,message:"Tipo rol eliminado correctamente"}
+      return {success:true,message:"Rol de usuario eliminado correctamente"}
     } catch (error) {
       throw error;
     }
